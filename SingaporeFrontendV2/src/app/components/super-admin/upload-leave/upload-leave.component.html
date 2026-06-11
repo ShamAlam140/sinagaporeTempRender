@@ -1,0 +1,293 @@
+<header>
+  <div class="d-flex align-items-center" style="
+      background-color: rgb(1, 1, 98);
+      height: 50px;
+      justify-content: space-between;
+    ">
+    <h4 style="
+        padding: 0px 10px;
+        font-weight: 200;
+        margin-top: 10px;
+        color: white;
+      ">
+      <!-- {{ showLeaveHistory === false ? 'UPLOAD LEAVES' : 'LAST UPLOADED LEAVE DETAILS' }} -->
+      {{ 'LAST UPLOADED LEAVE DETAILS' }}
+
+    </h4>
+    <div>
+      <!-- <button *ngIf="showLeaveHistory === false" (click)="showLeaveHistory = true" matTooltip="Show Leave History" color="warn" mat-mini-fab style="margin-right: 10px;">
+        <mat-icon style="color: white;">history</mat-icon>
+      </button> -->
+    </div>
+  </div>
+</header>
+
+<div hidden class="body">
+
+  <div class="card">
+    <div class="card-body">
+      <form id="file-upload-form" class="uploader">
+        <input id="file-upload" type="file" (change)="uploadExcel($event)" name="fileUpload" />
+
+        <label for="file-upload" id="file-drag">
+          <img id="file-image" src="#" alt="Preview" class="hidden" />
+          <div id="start">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="height: 100px">
+              <path
+                d="M105.4 182.6c12.5 12.49 32.76 12.5 45.25 .001L224 109.3V352c0 17.67 14.33 32 32 32c17.67 0 32-14.33 32-32V109.3l73.38 73.38c12.49 12.49 32.75 12.49 45.25-.001c12.49-12.49 12.49-32.75 0-45.25l-128-128C272.4 3.125 264.2 0 256 0S239.6 3.125 233.4 9.375L105.4 137.4C92.88 149.9 92.88 170.1 105.4 182.6zM480 352h-160c0 35.35-28.65 64-64 64s-64-28.65-64-64H32c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h448c17.67 0 32-14.33 32-32v-96C512 366.3 497.7 352 480 352zM432 456c-13.2 0-24-10.8-24-24c0-13.2 10.8-24 24-24s24 10.8 24 24C456 445.2 445.2 456 432 456z" />
+            </svg>
+            <div>Select a file</div>
+            <div id="notimage" class="hidden">Please select an image</div>
+            <span id="file-upload-btn" class="btn btn-primary">Select a file</span>
+          </div>
+          <div id="response" class="hidden">
+            <div id="messages"></div>
+            <progress class="progress" id="file-progress" value="0">
+              <span>0</span>%
+            </progress>
+          </div>
+        </label>
+      </form>
+      <div></div>
+    </div>
+    <div class="d-flex justify-content-center mb-3">
+      <h2 class="name">Import From Excel</h2>
+    </div>
+  </div>
+
+  <div *ngIf="showExcelTable === true" class="any d-flex justify-content-center align-items-center">
+    <table class="table" style="width: 80%;">
+      <thead>
+        <tr>
+          <th style="text-align: center;" scope="col">Sr. No.</th>
+          <th style="text-align: center;" scope="col">Staff Name</th>
+          <th style="text-align: center;" scope="col">Annual Leave Carried Forward from {{ currYear-1 }}</th>
+          <th style="text-align: center;" scope="col">Annual Leave Entitled for {{ currYear }}</th>
+          <th style="text-align: center;" scope="col">Total Leave</th>
+          <th style="text-align: center;" scope="col">Utilised Annual Leave to-date</th>
+          <th style="text-align: center;" scope="col">Annual Leave Balance</th>
+          <th style="text-align: center;" scope="col">Medical Leave Entitiled for {{ currYear }} </th>
+          <th style="text-align: center;" scope="col">Medical Leave Utilised to-date</th>
+          <th style="text-align: center;" scope="col">Medical Leave Balance</th>
+          <th style="text-align: center;" scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let leave of leaveDetails; index as i">
+          <th style="text-align: center;">{{ i+1 }}</th>
+          <th style="text-align: center;">{{ leave.staff }}</th>
+          <td style="text-align: center;">{{ leave.previous }}</td>
+          <td style="text-align: center;">{{ leave.current }}</td>
+          <td style="text-align: center;">{{ leave.total }}</td>
+          <td style="text-align: center;">{{ leave.utilised }}</td>
+          <td style="text-align: center;">{{ leave.remaining }}</td>
+          <td style="text-align: center;">{{ leave.sick }}</td>
+          <td style="text-align: center;">{{ leave.sickUtilised }}</td>
+          <td style="text-align: center;">{{ leave.sickRemaining }}</td>
+          <td (click)="uploadLeave(leave, i)">
+            <div class="upload d-flex justify-content-center">
+              <p>Upload</p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row mt-3 ms-2">
+      <div class="col-5">
+        <button (click)="uploadAllLeaves()" color="primary" mat-raised-button>Upload All</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- <div class="row">
+    <div class="col">
+      <div class="container mt-2">
+        <button (click)="showLeaveHistory = false" mat-raised-button color="accent">
+          <mat-icon style="color: black;">keyboard_arrow_left</mat-icon>
+          Back
+        </button>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="row ms-2" style="margin-top: 15px;">
+    <div class="col-4">
+      <mat-form-field style="width: 100%;" appearance="outline">
+        <mat-label>Search</mat-label>
+        <input [(ngModel)]="searchKey" (keyup)="applyFilter()" type="text" matInput>
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12" style="overflow-x: auto; padding: 0 20px;">
+
+      <div style="min-width: 1500px;">
+        <table id="excel-data" mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8"
+          style="width: 100%;">
+
+          <ng-container matColumnDef="srno">
+            <th style="width: 100px !important; text-align: center;" mat-header-cell *matHeaderCellDef> Sr. No. </th>
+            <td style="width: 100px !important; text-align: center;" mat-cell *matCellDef="let element; index as i"> {{
+              i+1 }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="staff">
+            <th mat-sort-header style="width: 100px !important; text-align: center;" mat-header-cell *matHeaderCellDef>
+              Staff Name </th>
+            <td style="width: 100px !important; text-align: center;" mat-cell *matCellDef="let element">
+              {{element.empName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="previous">
+            <th mat-sort-header style="width: 150px !important; text-align: center;" mat-header-cell *matHeaderCellDef>
+              Annual Leave Carried from Year {{ currYear - 1 }}</th>
+            <td style="width: 150px !important; text-align: center;" mat-cell *matCellDef="let element">
+              {{element.leaveType[0].carried}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="current">
+            <th mat-sort-header style="width: 150px !important; text-align: center;" mat-header-cell *matHeaderCellDef>
+              Annual Leave Entitled for Year {{ currYear }} </th>
+            <td style="width: 150px !important; text-align: center;" mat-cell *matCellDef="let element">
+              {{element.leaveType[0].issued}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="total">
+            <th mat-sort-header style="width: 100px !important; text-align: center;" mat-header-cell *matHeaderCellDef>
+              Total Leaves </th>
+            <td style="width: 100px !important; text-align: center;" mat-cell *matCellDef="let element">
+              {{element.leaveType[0].count}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="utilised">
+            <th mat-sort-header style="width: 150px !important; text-align: center;" mat-header-cell *matHeaderCellDef>
+              Annual Leave Utilised To-Date {{ currYear }} </th>
+            <td style="width: 150px !important; text-align: center;" mat-cell *matCellDef="let element"> {{
+              (element.leaveType?.[0]?.count || 0) - (element.leaveType?.[0]?.remaining || 0) }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="remaining">
+            <th mat-sort-header style="width: 100px !important; text-align: center;" mat-header-cell *matHeaderCellDef>
+              Annual Leave Balance </th>
+            <td style="width: 100px !important; text-align: center;" mat-cell *matCellDef="let element">
+              {{element.leaveType[0].remaining}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="sick">
+            <th mat-sort-header style="width: 150px !important; text-align: center;" mat-header-cell *matHeaderCellDef>
+              Medical Leave Entitled for Year {{ currYear }} </th>
+            <td style="width: 150px !important; text-align: center;" mat-cell *matCellDef="let element">
+              {{element.leaveType[1].issued}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="sickUtilised">
+            <th mat-sort-header style="width: 100px !important; text-align: center;" mat-header-cell *matHeaderCellDef>
+              Medical Leave Utilised To-Date {{ currYear }} </th>
+            <td style="width: 100px !important; text-align: center;" mat-cell *matCellDef="let element"> {{
+              (element.leaveType?.[1]?.count || 0) - (element.leaveType?.[1]?.remaining || 0) }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="sickRemaining">
+            <th mat-sort-header style="width: 100px !important; text-align: center;" mat-header-cell *matHeaderCellDef>
+              Medical Leave Balance </th>
+            <td style="width: 100px !important; text-align: center;" mat-cell *matCellDef="let element">
+              {{element.leaveType[1].remaining}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="hospitalization">
+            <th mat-sort-header style="width: 150px !important; text-align: center;" mat-header-cell *matHeaderCellDef>
+              Hospitalization Leave Entitled for Year {{ currYear }}
+            </th>
+            <td style="width: 150px !important; text-align: center;" mat-cell *matCellDef="let element">
+              {{element.leaveType[3].issued}}
+            </td>
+          </ng-container>
+
+          <!-- Hospitalization Leave Utilised -->
+          <ng-container matColumnDef="hospitalizationUtilised">
+            <th mat-sort-header style="width: 100px !important; text-align: center;" mat-header-cell *matHeaderCellDef>
+              Hospitalization Leave Utilised To-Date {{ currYear }}
+            </th>
+            <td style="width: 100px !important; text-align: center;" mat-cell *matCellDef="let element">
+              {{ (element.leaveType?.[3]?.count || 0) - (element.leaveType?.[3]?.remaining || 0) }}
+            </td>
+          </ng-container>
+
+          <!-- Hospitalization Leave Balance -->
+          <ng-container matColumnDef="hospitalizationRemaining">
+            <th mat-sort-header style="width: 100px !important; text-align: center;" mat-header-cell *matHeaderCellDef>
+              Hospitalization Leave Balance
+            </th>
+            <td style="width: 100px !important; text-align: center;" mat-cell *matCellDef="let element">
+              {{element.leaveType[3].remaining}}
+            </td>
+          </ng-container>
+          <!-- <ng-container matColumnDef="actions">
+            <th style="width: 100px !important; text-align: center;" mat-header-cell *matHeaderCellDef> Actions </th>
+            <td style="width: 100px !important; text-align: center;" mat-cell *matCellDef="let element">
+              <button (click)="deleteLeaveRecord(element)" matTooltip="Delete Record" mat-mini-fab color="warn">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container> -->
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+        </mat-paginator>
+      </div>
+
+
+    </div>
+  </div>
+  <div class="row mt-3 ms-3">
+    <div class="col">
+      <button (click)="exportExcel()" mat-raised-button color="primary">
+        <mat-icon>import_export</mat-icon>
+        Import to Excel
+      </button>
+    </div>
+  </div>
+
+
+  <table hidden class="table" style="width: 100%;">
+    <thead>
+      <tr>
+        <th style="text-align: center;" scope="col">Sr. No.</th>
+        <th style="text-align: center;" scope="col">Staff Name</th>
+        <th style="text-align: center;" scope="col">Annual Leave Carried Forward from {{ currYear-1 }}</th>
+        <th style="text-align: center;" scope="col">Annual Leave Entitled for {{ currYear }}</th>
+        <th style="text-align: center;" scope="col">Total Leave</th>
+        <th style="text-align: center;" scope="col">Utilised Annual Leave to-date</th>
+        <th style="text-align: center;" scope="col">Annual Leave Balance</th>
+        <th style="text-align: center;" scope="col">Medical Leave Entitiled for {{ currYear }} </th>
+        <th style="text-align: center;" scope="col">Medical Leave Utilised to-date</th>
+        <th style="text-align: center;" scope="col">Medical Leave Balance</th>
+        <th style="text-align: center;" scope="col"> Hospitalization Leave Entitiled for {{ currYear }} </th>
+        <th style="text-align: center;" scope="col"> Hospitalization Leave Utilised to-date</th>
+        <th style="text-align: center;" scope="col"> Hospitalization Leave Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let leave of leaveHistory; index as i">
+        <th style="text-align: center;">{{ i+1 }}</th>
+        <th style="text-align: center;">{{ leave.staff }}</th>
+        <td style="text-align: center;">{{ leave.previous }}</td>
+        <td style="text-align: center;">{{ leave.current }}</td>
+        <td style="text-align: center;">{{ leave.total }}</td>
+        <td style="text-align: center;">{{ leave.utilised }}</td>
+        <td style="text-align: center;">{{ leave.remaining }}</td>
+        <td style="text-align: center;">{{ leave.sick }}</td>
+        <td style="text-align: center;">{{ leave.sickUtilised }}</td>
+        <td style="text-align: center;">{{ leave.sickRemaining }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

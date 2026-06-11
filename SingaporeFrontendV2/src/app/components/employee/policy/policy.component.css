@@ -1,0 +1,19 @@
+.download{
+    height: 20px;
+    width: 65px;
+    background-color: #673ab7;
+    border-radius: 3px;
+    border: 1px solid black;
+     cursor: pointer;
+  }
+  .download p{
+    font-size: 12px;
+    color: white;
+  }
+  .download:hover{
+    background-color: #8264b4;
+    color: black;
+  }
+  .download > p:hover{
+    color: black;
+  }

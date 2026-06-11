@@ -1,0 +1,154 @@
+<header>
+  <div
+    class="d-flex align-items-center"
+    style="
+      background-color: rgb(1, 1, 98);
+      height: 50px;
+      justify-content: space-between;
+    "
+  >
+    <h4
+      style="
+        padding: 0px 10px;
+        font-weight: 200;
+        margin-top: 10px;
+        color: white;
+      "
+    >
+      EMPLOYEE MANAGER MAPPING
+    </h4>
+  </div>
+</header>
+
+<div style="background-color: rgb(241, 241, 241); padding: 20px">
+
+  <div class="container emp">
+    <b style="margin-bottom: 6px;">
+      Employee Mapping
+    </b>
+
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel *ngFor="let employee of employees; index as i">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong> {{ i + 1 }}.&nbsp; </strong> {{ employee.empName }}
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <p style="text-align: center;" *ngIf="employee?.coveringEmployees && employee.coveringEmployees.length > 0">Current Covering Employee(s): <b class="ms-2" *ngIf="employee?.coveringEmployees[0]">1. {{ employee.coveringEmployees[0]?.name }}</b> <b class="ms-2" *ngIf="employee?.coveringEmployees.length > 1 && employee.coveringEmployees[1]">2. {{ employee.coveringEmployees[1]?.name }}</b>  </p>
+        <h6 style="text-align: center;" *ngIf="!employee?.coveringEmployees || employee.coveringEmployees.length === 0">No Covering Employees</h6>
+
+        <form (ngSubmit)="submitCoveringEmp(f.value, employee)" #f="ngForm" [formGroup]="empService.coveringEmployeeForm">
+          <mat-form-field  style="width: 45%; margin: 0px 5px;" appearance="outline">
+            <mat-label>Covering Employee - 1</mat-label>
+            <mat-select formControlName="coveringEmp1" (valueChange)="changeCoverEmp1(employee, $event, 'first')">
+              <mat-option
+                *ngFor="let emp of employees[i].allCoveringEmployees"
+                [value]="emp"
+              >
+                {{ emp.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field  style="width: 45%; margin: 0px 5px;" appearance="outline">
+            <mat-label>Covering Employee - 2</mat-label>
+            <mat-select formControlName="coveringEmp2" placeholder="Add Team Members">
+              <mat-option
+                *ngFor="let emp of coveringEmployees2"
+                [value]="emp"
+              >
+                {{ emp.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <button mat-raised-button color="accent" [disabled]="f.invalid" style="float: right; margin-top: 10px;">Add</button>
+          
+          <div class="row">
+            <div class="col-5 d-flex justify-content-center">
+              <div>
+                <button type="button" (click)="empService.coveringEmployeeForm.reset()" mat-raised-button color="warn">Clear</button>
+              </div>
+            </div>
+            <div class="col-7 d-flex justify-content-center">
+              <div>
+                <button type="button" (click)="empService.coveringEmployeeForm.get('coveringEmp2').reset()" mat-raised-button color="warn">Clear</button>
+              </div>
+            </div>
+          </div>
+        </form>
+  
+        
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>
+
+
+<div style="background-color: rgb(241, 241, 241); padding: 20px">
+
+  <div class="container emp">
+    <b style="margin-bottom: 6px;">
+      Manager Mapping
+    </b>
+
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel *ngFor="let employee of employees; index as i">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong> {{ i + 1 }}.&nbsp; </strong> {{ employee.empName }} <b> (Reports To)</b> 
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <p style="text-align: center;" *ngIf="employee?.reportingManager && employee.reportingManager.length > 0">Current Reporting Manager(s): <b class="ms-2" *ngIf="employee?.reportingManager[0]">1. {{ employee.reportingManager[0]?.name }}</b> <b class="ms-2" *ngIf="employee?.reportingManager.length > 1 && employee.reportingManager[1]">2. {{ employee.reportingManager[1]?.name }}</b>  </p>
+        <h6 style="text-align: center;" *ngIf="!employee?.reportingManager || employee.reportingManager.length === 0">No Reporting Managers</h6>
+
+        <form (ngSubmit)="submitReportingManagers(f.value, employee)" #f="ngForm" [formGroup]="managerService.reportingManForm">
+          <mat-form-field  style="width: 45%; margin: 0px 5px;" appearance="outline">
+            <mat-label>Reporting Manager - 1</mat-label>
+            <mat-select formControlName="reportingMan1" (valueChange)="changeReportMan1($event, 'first')">
+              <mat-option
+                *ngFor="let man of managers"
+                [value]="man"
+              >
+                {{ man.managerName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field  style="width: 45%; margin: 0px 5px;" appearance="outline">
+            <mat-label>Reporting Manager - 2</mat-label>
+            <mat-select formControlName="reportingMan2" (valueChange)="changeReportMan1($event, 'second')">
+              <mat-option
+                *ngFor="let man of reportingMan2"
+                [value]="man"
+              >
+                {{ man.managerName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <button mat-raised-button color="accent" style="float: right; margin-top: 10px;">Add</button>
+          
+          <div class="row">
+            <div class="col-5 d-flex justify-content-center">
+              <div>
+                <button type="button" (click)="managerService.reportingManForm.reset()" mat-raised-button color="warn">Clear</button>
+              </div>
+            </div>
+            <div class="col-7 d-flex justify-content-center">
+              <div>
+                <button type="button" (click)="managerService.reportingManForm.get('reportingMan2').reset()" mat-raised-button color="warn">Clear</button>
+              </div>
+            </div>
+          </div>
+        </form>
+  
+        
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

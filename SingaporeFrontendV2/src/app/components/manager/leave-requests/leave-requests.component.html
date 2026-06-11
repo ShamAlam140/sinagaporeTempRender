@@ -1,0 +1,120 @@
+<header>
+  <div
+    class="d-flex align-items-center"
+    style="
+      background-color: rgb(1, 1, 98);
+      height: 50px;
+      justify-content: space-between;
+    "
+  >
+    <h4
+      style="
+        padding: 0px 10px;
+        font-weight: 200;
+        margin-top: 10px;
+        color: white;
+      "
+    >
+      LEAVE REQUESTS
+    </h4>
+
+   
+
+  </div>
+</header>
+
+<div style="padding: 20px" *ngIf="empPending.length != 0">
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">S.NO</th>
+          <th scope="col">E.Name</th>
+          <th scope="col">FROM</th>
+          <th scope="col">TO</th>
+          <th scope="col">TYPE</th>
+          <th scope="col">REASON</th>
+          <th scope="col">DAYS</th>
+          
+          <th scope="col">COVERING OFFICERS</th>
+          <th scope="col">E. COMMENT</th>
+          <th scope="col">SPECIAL CASE</th>
+          <th scope="col">ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let emp of empPending; let i = index"
+          style="align-items: center"
+        >
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ emp.empName }}</td>
+          <td>{{ emp.fromDate | date }}</td>
+          <td>{{ emp.toDate | date }}</td>
+          <td>{{ emp.type }}
+          </td>
+          <td>{{ emp.reason }}</td>
+          <td>{{ emp.count }}  {{ emp.halftype }}  </td>
+          <td>{{ emp.coveringofficer?.[0]?.name }} , {{ emp.coveringofficer?.[1]?.name }}  </td>
+          <td>{{ emp.usercomment }}</td>
+          <td>{{ emp.specialcase }}  
+          </td>
+      
+
+          <td>
+            <button
+              mat-mini-fab
+              (click)="openDialog('Approve', emp, i)"
+              style="background-color: green; color: white; margin: 5px;"
+            >
+              <mat-icon >open_in_new</mat-icon>
+            </button>
+
+            
+            <button
+              mat-mini-fab
+              (click)="openDialog('Deny', emp, i)"
+              style="background-color: red; color: white; margin: 5px"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+           
+            <button
+            matTooltip="View Certificate"
+            *ngIf="emp.certificate !== 'empty' && (emp.type === 'Sick/Casual' || emp.type === 'Hospitalization')"
+            (click)="openImage(emp.certificate)"
+            mat-mini-fab
+            style="background-color: purple; color: white; margin: 5px"
+          >
+            <mat-icon>open_in_new</mat-icon>
+          </button>
+          
+          
+
+          </td>
+         
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div
+  *ngIf="empPending.length == 0"
+  style="height: auto; width: 100%; padding: 20px"
+>
+  <span
+    class="badge bg-light text-dark"
+    style="font-size: 20px; background-color: lightgray !important"
+    >NO LEAVE REQUESTS</span
+  >
+</div>
+
+<!-- Calendar always visible, outside of any *ngIf -->
+<div style="padding: 20px; width: 1100px;">
+  <full-calendar
+    [options]="calendarOptions"
+    style="padding-top: 10px"
+  ></full-calendar>
+</div>
+

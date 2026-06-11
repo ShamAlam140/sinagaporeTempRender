@@ -1,0 +1,43 @@
+<header>
+  <div class="d-flex align-items-center" style="
+        background-color: rgb(1, 1, 98);
+        height: 50px;
+        justify-content: space-between;
+      ">
+    <h4 style="
+          padding: 0px 10px;
+          font-weight: 200;
+          margin-top: 10px;
+          color: white;
+        ">
+      CHANGE YOUR REPORTING MANAGERS:
+    </h4>
+    <div (click)="dialogRef.close(1)">
+      <span class="iconify" data-icon="ion:close" style="color: white; padding-right: 5px; cursor: pointer;"
+        data-width="26" data-height="26"></span>
+    </div>
+  </div>
+</header>
+
+<form (ngSubmit)="submitReportingManagers(f.value)" #f="ngForm" [formGroup]="managerService.reportingManForm">
+  <mat-form-field style="width: 48%; margin: 10px 5px;" appearance="outline">
+    <mat-label>Reporting Manager - 1</mat-label>
+    <mat-select formControlName="reportingMan1" (valueChange)="changeReportMan1($event, 'first')">
+      <mat-option *ngFor="let man of managers" [value]="man">
+        {{ man.managerName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field style="width: 48%; margin: 10px 5px;" appearance="outline">
+    <mat-label>Reporting Manager - 2</mat-label>
+    <mat-select formControlName="reportingMan2" (valueChange)="changeReportMan1($event, 'second')">
+      <mat-option *ngFor="let man of reportingMan2" [value]="man">
+        {{ man.managerName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button [disabled]="managerService.reportingManForm.invalid" mat-raised-button color="accent"
+    style="float: right;">Add</button>
+</form>

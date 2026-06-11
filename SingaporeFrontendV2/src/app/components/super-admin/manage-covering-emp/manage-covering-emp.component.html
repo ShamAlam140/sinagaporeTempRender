@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="row">
+        <div class="col-8 d-flex align-items-center">
+            <mat-icon class="mx-1">person</mat-icon>
+            All Covering Employees of: <b style="font-size: 18px;" class="mx-1"> {{ data?.empName }}</b> 
+        </div>
+        <div class="col-4 d-flex justify-content-end">
+            <button *ngIf="selectCoveringEmpBool === false" (click)="selectCoveringEmpBool = true" mat-raised-button color="primary">
+                <mat-icon>add</mat-icon>
+                Covering Employees
+            </button>
+            <button *ngIf="selectCoveringEmpBool === true" (click)="selectCoveringEmpBool = false" mat-raised-button color="warn">
+                <mat-icon>cancel</mat-icon>
+                Cancel
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="selectCoveringEmpBool === true" class="row mt-3">
+        <div class="col">
+            <mat-form-field style="width: 80%;" appearance="outline">
+                <mat-label>All Covering Employees</mat-label>
+                <mat-select (selectionChange)="assignFirstName()" [formControl]="empControl" multiple>
+                <mat-select-trigger>
+                    {{ empControl.value ? firstEmpName : "" }}
+                    <span
+                    *ngIf="empControl.value?.length > 1"
+                    class="example-additional-selection"
+                    >
+                    (+{{ empControl.value?.length - 1 }}
+                    {{ empControl.value?.length === 2 ? "other" : "others" }})
+                    </span>
+                </mat-select-trigger>
+                <mat-option *ngFor="let emp of empList" [value]="emp">{{
+                    emp.empName
+                }}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="empControl.touched && empControl.invalid">
+                    Please Select Atleast One Covering Employee!
+                </mat-error>
+            </mat-form-field>
+
+            <button class="ms-3" [disabled]="empControl.invalid" (click)="submitCoveringEmployees()" mat-raised-button style="width: 17%;" color="primary">Submit</button>
+        </div>
+    </div>
+
+    <div class="row d-flex align-items-center mt-3" [ngStyle]="{height: selectCoveringEmpBool === true  ? '200px' : '200px'}">
+        <div class="col d-flex justify-content-center">
+            <div class="d-flex justify-content-center " style="width: 100%;">
+
+                <table *ngIf="data?.allCoveringEmployees.length !== 0; else noData" class="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 40%; text-align: center;" scope="col">Sr. No</th>
+                            <th style="width: 60%; text-align: center;" scope="col">Covering Employee</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let emp of data?.allCoveringEmployees; index as i">
+                            <th style="width: 40%; text-align: center;" scope="row">{{ i+1 }}</th>
+                            <td style="width: 60%; text-align: center;">{{ emp.name }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <ng-template #noData>
+                    <div class="d-flex align-items-center justify-content-center" style="width: 60%; height: 200px; background-color: rgb(167, 166, 166); border: 2px solid black; border-radius: 5px;">
+                        <h5>No Covering Employees!</h5>
+                    </div>
+                </ng-template>
+
+            </div>
+        </div>
+    </div>
+</div>

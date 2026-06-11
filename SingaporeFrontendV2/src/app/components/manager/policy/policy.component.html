@@ -1,0 +1,44 @@
+<header>
+    <div
+      class="d-flex align-items-center"
+      style="
+        background-color: rgb(1, 1, 98);
+        height: 50px;
+        justify-content: space-between;
+      "
+    >
+      <h4
+        style="
+          padding: 0px 10px;
+          font-weight: 200;
+          margin-top: 10px;
+          color: white;
+        "
+      >
+        COMPANY POLICIES
+      </h4>
+    </div>
+  </header>
+  
+  
+  <div class="row" style="padding: 15px 20px">
+    <div class="col-6 ">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th scope="col">S.No</th>
+            <th scope="col">Policy</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let policy of policies; index as i">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>policy {{ i + 1 }}</td>
+            <td (click)="downloadPolicy(policy)"><div class="download d-flex justify-content-center"><p>View</p></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

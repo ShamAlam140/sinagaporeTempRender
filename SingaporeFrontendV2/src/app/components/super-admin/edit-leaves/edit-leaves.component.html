@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row">
+        <div class="col d-flex align-items-center">
+            <mat-icon class="me-1">assignment</mat-icon>
+            {{ data.empName }}
+        </div>
+    </div>
+    <table class="table mt-3">
+        <thead>
+          <tr>
+            <th style="text-align: center;" scope="col">Sr. No.</th>
+            <th style="text-align: center;" scope="col">Type</th>
+            <th style="text-align: center;" scope="col">Count</th>
+            <th style="text-align: center;" scope="col">Remaining</th>
+            <th style="text-align: center;" scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let leave of leaves; index as i">
+            <td style="text-align: center;">{{ i + 1 }}</td>
+            <td style="text-align: center;">{{ leave.type }}</td>
+            <td *ngIf="editLeaveToggle[i] === false" style="text-align: center;">{{ leave.issued }}</td>
+            <td *ngIf="editLeaveToggle[i] === true" style="text-align: center;">
+                <input [(ngModel)]="leaveCount" type="text" [placeholder]="leave.issued">
+            </td>
+            <td *ngIf="editLeaveToggle[i] === false"  style="text-align: center;">{{ leave.remaining }}</td>
+            <td *ngIf="editLeaveToggle[i] === true" style="text-align: center;">
+              <input [(ngModel)]="leaveRemain" type="text" [placeholder]="leave.remaining">
+          </td>
+            <td *ngIf="editLeaveToggle[i] === false" style="text-align: center;"><button (click)="onclick(i, leave)" mat-raised-button color="primary"> <mat-icon>upload</mat-icon> Update Count</button></td>
+            <td style="text-align: center;">
+                <button
+            mat-mini-fab
+            (click)="addCount(leaveCount, leave , leaveRemain)"
+            *ngIf="editLeaveToggle[i] === true"
+            style="background-color: purple; color: white; margin: 5px; text-align: center;"
+            >
+            <mat-icon>check</mat-icon> 
+            </button>
+            <button
+            *ngIf="editLeaveToggle[i] === true"
+                mat-mini-fab
+                (click)="editLeaveToggle[i] = false"
+                style="background-color: red; color: white; margin: 5px; text-align: center;"
+            >
+            <mat-icon>cancel</mat-icon>
+            </button>
+            </td>
+            
+            <!-- <td *ngIf="editLeaveToggle[i] === true" style="text-align: center;"><button mat-raised-button color="primary"> <mat-icon>check</mat-icon> Update</button></td>
+            <td *ngIf="editLeaveToggle[i] === true" style="text-align: center;"><button (click)="editLeaveToggle[i] = false" mat-raised-button color="warn"> <mat-icon>cancel</mat-icon> Cancel</button></td> -->
+          </tr>
+        </tbody>
+      </table>
+</div>

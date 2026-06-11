@@ -1,0 +1,161 @@
+<!-- <header>
+  <div class="d-flex align-items-center" style="
+      background-color: rgb(1, 1, 98);
+      height: 50px;
+      justify-content: space-between;
+    ">
+    <h4 style="
+        padding: 0px 10px;
+        font-weight: 200;
+        margin-top: 10px;
+        color: white;
+      ">
+      LEAVE HISTORY
+    </h4>
+  </div>
+</header>
+
+<div style="padding: 20px">
+  <div class="row">
+    <div class="col-md-8">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">S.NO</th>
+            <th scope="col">LEAVE TYPE</th>
+            <th scope="col">FROM</th>
+            <th scope="col">TO</th>
+            <th scope="col">DAYS</th>
+            <th scope="col">STATUS</th>
+            <th scope="col">OFFICER COMMENT</th>
+            <th scope="col" style="width: 120px;">ACTION</th>
+            <th scope="col">CANCEL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let leave of leaves; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ leave.type }} Leave</td>
+            <td>{{ leave.fromDate | date }}</td>
+            <td>{{ leave.toDate | date }}</td>
+            <td>{{ leave.count }}</td>
+            <td>
+              <span class="badge" [class.bg-primary]="leave.status === 'Pending'"
+                [class.bg-success]="leave.status === 'Approved'" [class.bg-danger]="leave.status === 'Denied'"
+                style="font-weight: 400; padding: 8px; width: 80px">
+                {{ leave.status }}
+              </span>
+            </td>
+
+            <td>{{ leave.mngcomment }}</td>
+            <td>
+              <button matTooltip="Comment" (click)="handleEventClick(leave)" mat-mini-fab
+                style="background-color: purple; color: white; margin: 5px">
+                <mat-icon>comment</mat-icon>
+              </button>
+
+              <button matTooltip="Edit" *ngIf="leave.approve1!=true && leave.status!='Denied'"
+                (click)="handleEditClick(leave)" mat-mini-fab
+                style="background-color: purple; color: white; margin: 5px">
+                <mat-icon>edit</mat-icon>
+              </button>
+
+            </td>
+
+            <td>
+              <button matTooltip="Delete" mat-mini-fab (click)="handledelete(leave)"
+                style="background-color: red; color: white; margin: 5px">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+
+
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div> -->
+
+<header>
+  <div class="d-flex align-items-center" style="
+      background-color: rgb(1, 1, 98);
+      height: 50px;
+      justify-content: space-between;
+    ">
+    <h4 style="
+        padding: 0px 10px;
+        font-weight: 200;
+        margin-top: 10px;
+        color: white;
+      ">
+      LEAVE HISTORY
+    </h4>
+  </div>
+</header>
+
+<div style="padding: 20px">
+  <div class="row">
+    <div class="col-md-8">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">S.NO</th>
+            <th scope="col">LEAVE TYPE</th>
+            <th scope="col">FROM</th>
+            <th scope="col">TO</th>
+            <th scope="col">DAYS</th>
+            <th scope="col">STATUS</th>
+            <th scope="col">OFFICER COMMENT</th>
+            <th scope="col" style="width: 120px;">ACTION</th>
+            <th scope="col">CANCEL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let leave of leaves; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ leave.type }} Leave</td>
+            <td>{{ leave.fromDate | date }}</td>
+            <td>{{ leave.toDate | date }}</td>
+            <td>{{ leave.count }}</td>
+            <td>
+              <span class="badge"
+                [class.bg-primary]="leave.status === 'Pending'"
+                [class.bg-success]="leave.status === 'Approved'"
+                [class.bg-danger]="leave.status === 'Denied'"
+                style="font-weight: 400; padding: 8px; width: 80px">
+                {{ leave.status }}
+              </span>
+            </td>
+
+            <td>{{ leave.mngcomment }}</td>
+            <td>
+              <button matTooltip="Comment" (click)="handleEventClick(leave)" mat-mini-fab
+                style="background-color: purple; color: white; margin: 5px">
+                <mat-icon>comment</mat-icon>
+              </button>
+
+              <!-- EDIT BUTTON: show for ALL leaves (removed previous *ngIf) -->
+              <button matTooltip="Edit"
+                (click)="handleEditClick(leave)" mat-mini-fab
+                style="background-color: purple; color: white; margin: 5px">
+                <mat-icon>edit</mat-icon>
+              </button>
+
+            </td>
+
+            <td>
+              <button matTooltip="Delete" mat-mini-fab (click)="handledelete(leave)"
+                style="background-color: red; color: white; margin: 5px">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>

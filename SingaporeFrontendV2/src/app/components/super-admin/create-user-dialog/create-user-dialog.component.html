@@ -1,0 +1,111 @@
+<div style="padding: 20px">
+  <h5><strong>Employee Form</strong></h5>
+  <div style="padding: 10px 0px">
+    <form
+      (ngSubmit)="onSubmit(f.value, empControl.value)"
+      #f="ngForm"
+      [formGroup]="empService.userForm"
+    >
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Employee Name</mat-label>
+            <input matInput formControlName="empName" />
+            <mat-icon matSuffix>perm_identity</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Employee User Name</mat-label>
+            <input matInput formControlName="empUserName" />
+            <mat-icon matSuffix>perm_identity</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Choose Birth date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="empDob" />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Choose Joined Date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker1"
+              formControlName="empJoined"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker1"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Employee Email</mat-label>
+            <input matInput formControlName="empEmail" />
+            <mat-icon matSuffix>mail_outline</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="empPassword" />
+            <mat-icon matSuffix>vpn_key</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
+      <div *ngIf="data.type === 'new'" class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>All Covering Employees</mat-label>
+          <mat-select (selectionChange)="assignFirstName()" [formControl]="empControl" multiple>
+            <mat-select-trigger>
+              {{ empControl.value ? firstEmpName : "" }}
+              <span
+                *ngIf="empControl.value?.length > 1"
+                class="example-additional-selection"
+              >
+                (+{{ empControl.value.length - 1 }}
+                {{ empControl.value?.length === 2 ? "other" : "others" }})
+              </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let emp of empList" [value]="emp">{{
+              emp.empName
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <button
+      *ngIf="data.type === 'new'"
+        type="submit"
+        mat-flat-button
+        color="primary"
+        style="float: right"
+        [disabled]="!f.valid"
+      >
+        Add
+      </button>
+      <button
+      *ngIf="data.type === 'edit'"
+        type="submit"
+        mat-flat-button
+        color="primary"
+        style="float: right"
+        [disabled]="!f.valid"
+      >
+        Update
+      </button>
+    </form>
+  </div>
+</div>

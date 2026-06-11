@@ -1,0 +1,30 @@
+<div class="addContainer">
+  <div style="font-size: 20px" class="fw-bold mt-2" style="margin-bottom: 20px">
+    Details
+  </div>
+
+  <div mat-dialog-content style="overflow: hidden !important">
+    <div class="container d-flex align-items-center mt-3">
+      Holiday Name:
+      <strong class="mx-1">{{ data.title }}</strong>
+    </div>
+    <div class="container d-flex align-items-center mt-3">
+      Holiday Date:
+      <strong class="mx-1"
+        >{{ data.start | date }} to {{ data.end | date }}</strong
+      >
+    </div>
+
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button
+      type="button"
+        mat-button
+        (click)="deleteHoliday()"
+        cdkFocusInitial
+      >
+        Delete
+      </button>
+    </mat-dialog-actions>
+  </div>
+</div>

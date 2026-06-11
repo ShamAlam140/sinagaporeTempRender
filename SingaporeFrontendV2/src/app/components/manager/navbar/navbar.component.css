@@ -1,0 +1,61 @@
+mat-sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav {
+  padding: 16px;
+}
+
+mat-sidenav {
+  background-color: rgb(1, 1, 98);
+}
+
+.header-icon {
+  color: white;
+  justify-content: center;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+/* Old v13 class (keep for backward compat) */
+.mat-list-item {
+  color: white;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+/* Angular Material v19 MDC-based classes */
+.mat-mdc-list-item {
+  color: white !important;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+.mat-mdc-list-item .mdc-list-item__primary-text {
+  color: white !important;
+}
+
+.mat-mdc-list-item .mat-mdc-list-item-unscoped-content {
+  color: white !important;
+}
+
+.mat-list-item-content {
+  justify-content: center;
+}
+
+/* Old v13 class */
+.mat-divider {
+  border-top-color: rgba(255, 255, 255, 0.664);
+  margin: 5px 3px;
+}
+
+/* Angular Material v19 MDC-based divider */
+.mat-mdc-divider {
+  border-top-color: rgba(255, 255, 255, 0.664) !important;
+  margin: 5px 3px;
+}
+
+.sidenav-icon {
+  color: rgba(255, 255, 255, 0.856);
+  margin-right: 15px;
+}

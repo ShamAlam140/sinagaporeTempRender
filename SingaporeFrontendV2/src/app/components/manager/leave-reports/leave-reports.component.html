@@ -1,0 +1,52 @@
+<header>
+  <div class="d-flex align-items-center" style="
+      background-color: rgb(1, 1, 98);
+      height: 50px;
+      justify-content: space-between;
+    ">
+    <h4 style="
+        padding: 0px 10px;
+        font-weight: 200;
+        margin-top: 10px;
+        color: white;
+      ">
+      LEAVE REPORTS OF EVERY EMPLOYEE
+    </h4>
+  </div>
+</header>
+
+<div style="padding: 20px">
+  <mat-form-field appearance="outline">
+    <mat-label>Filter</mat-label>
+    <input matInput [(ngModel)]="searchKey" (keyup)="applyFilter()" placeholder="Search" #input />
+  </mat-form-field>
+
+  <mat-table class="mat-eleveation-z8" [dataSource]="listData">
+    <!-- Index Column -->
+    <ng-container matColumnDef="index">
+      <mat-header-cell *matHeaderCellDef> <b> No.</b> </mat-header-cell>
+      <mat-cell *matCellDef="let i = index"> {{ i + 1 }} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> <b>E.Name</b> </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.empName }} </mat-cell>
+    </ng-container>
+
+    <!--User Name Column -->
+    <ng-container matColumnDef="userName">
+      <mat-header-cell *matHeaderCellDef> <b>UserName</b> </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.empUserName }} </mat-cell>
+    </ng-container>
+
+    <!--Leave Issuer Column -->
+    <ng-container matColumnDef="totalLeaves">
+      <mat-header-cell *matHeaderCellDef> <b>Total Leaves Taken</b> </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.totalLeaves }} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns" (click)="showDetails(row)"></mat-row>
+  </mat-table>
+</div>

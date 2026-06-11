@@ -1,0 +1,22 @@
+<div mat-dialog-content>
+  <div class="col" style="margin-bottom: 20px">
+    <strong>Holiday Date: </strong>{{ data.start }} to {{ data.end }}
+  </div>
+
+  <div class="col">
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>Holiday Name</mat-label>
+      <input matInput [(ngModel)]="data.title" required />
+    </mat-form-field>
+  </div>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-button
+    (click)="onSubmit()"
+    cdkFocusInitial
+  >
+    Add Holiday
+  </button>
+</mat-dialog-actions>

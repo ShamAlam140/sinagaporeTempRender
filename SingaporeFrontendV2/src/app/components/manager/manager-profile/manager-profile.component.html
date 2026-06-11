@@ -1,0 +1,60 @@
+<header>
+  <div
+    class="d-flex align-items-center"
+    style="
+      background-color: rgb(1, 1, 98);
+      height: 50px;
+      justify-content: space-between;
+    "
+  >
+    <h4
+      style="
+        padding: 0px 10px;
+        font-weight: 200;
+        margin-top: 10px;
+        color: white;
+      "
+    >
+      MANAGER PROFILE
+    </h4>
+  </div>
+</header>
+
+<div style="background-color: rgb(241, 241, 241); height: 100%">
+  <div class="row d-flex align-items-center" style="padding: 12px 20px">
+    <div class="col" style="font-size: 16px">
+      <mat-card>
+        <strong style="letter-spacing: 1px">FULL NAME:</strong>
+        {{ manager.managerName }}</mat-card
+      >
+    </div>
+    <div class="col" style="font-size: 16px">
+      <mat-card>
+        <strong style="letter-spacing: 1px">USERNAME:</strong>
+        {{ manager.managerUserName }}</mat-card
+      >
+    </div>
+  </div>
+  <div class="row d-flex align-items-center" style="padding: 12px 20px">
+    <div class="col" style="font-size: 16px">
+      <mat-card>
+        <strong style="letter-spacing: 1px">EMAIL:</strong>
+        {{ manager.managerEmail }}</mat-card
+      >
+    </div>
+    <div class="col" style="font-size: 16px">
+      <mat-card>
+        <strong style="letter-spacing: 1px">DATE-OF-BIRTH:</strong>
+        {{ manager.managerDob | date}}</mat-card
+      >
+    </div>
+  </div>
+  <div class="row d-flex align-items-center" style="padding: 12px 20px">
+    <div class="col" style="font-size: 16px">
+      <mat-card>
+        <strong style="letter-spacing: 1px">JOINED DATE:</strong>
+        {{ manager.managerJoined | date}}</mat-card
+      >
+    </div>
+  </div>
+</div>

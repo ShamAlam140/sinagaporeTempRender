@@ -1,0 +1,29 @@
+<div class="addContainer">
+    <div style="font-size: 20px" class="fw-bold mt-2" style="margin-bottom: 20px">
+      Details
+    </div>
+  
+    <div mat-dialog-content style="overflow: hidden !important">
+      <div class="container d-flex align-items-center mt-3">
+        Holiday Name:
+        <strong class="mx-1">{{ data.title }}</strong>
+      </div>
+      <div class="container d-flex align-items-center mt-3">
+        Holiday Date:
+        <strong class="mx-1"
+          >{{ data.start | date }} to {{ data.end | date }}</strong
+        >
+      </div>
+  
+      <div class="col" *ngIf="data.action === 'edit'" style="margin: 20px 10px">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Holiday Name</mat-label>
+          <input matInput [(ngModel)]="data.title" required />
+        </mat-form-field>
+
+        <button>Hello</button>
+      </div>
+
+    </div>
+  </div>
+  

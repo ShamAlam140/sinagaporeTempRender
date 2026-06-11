@@ -1,0 +1,46 @@
+<header>
+  <div
+    class="d-flex align-items-center"
+    style="
+      background-color: rgb(1, 1, 98);
+      height: 50px;
+      justify-content: space-between;
+    "
+  >
+    <h4
+      style="
+        padding: 0px 10px;
+        font-weight: 200;
+        margin-top: 10px;
+        color: white;
+      "
+    >
+      SUPER ADMIN PROFILE
+    </h4>
+  </div>
+</header>
+
+<div style="background-color: rgb(241, 241, 241); height: 100%">
+  <div class="row d-flex align-items-center" style="padding: 12px 20px">
+    <div class="col" style="font-size: 16px">
+      <mat-card>
+        <strong style="letter-spacing: 1px">EMAIL:</strong>
+        {{ superAdmin.email }}
+      </mat-card>
+    </div>
+    <div class="col" style="font-size: 16px">
+      <mat-card>
+        <strong style="letter-spacing: 1px">USERNAME:</strong>
+        {{ superAdmin.username }}
+      </mat-card>
+    </div>
+  </div>
+  <div style="margin-left: 20px; width: 300px;">
+    <mat-card (click)="onclick()">
+      <strong style="letter-spacing: 1px">RESET YEAR
+        <mat-icon>restore</mat-icon>
+      </strong>
+    </mat-card>
+  </div>
+  
+</div>

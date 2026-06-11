@@ -1,0 +1,71 @@
+<header>
+  <div
+    class="d-flex align-items-center"
+    style="
+      background-color: rgb(1, 1, 98);
+      height: 50px;
+      justify-content: space-between;
+    "
+  >
+    <h4
+      style="
+        padding: 0px 10px;
+        font-weight: 200;
+        margin-top: 10px;
+        color: white;
+      "
+    >
+      CREATE & DELETE MANAGER
+    </h4>
+  </div>
+</header>
+
+<div style="padding: 20px; height: 76px">
+  <button
+    mat-raised-button
+    (click)="openDialog()"
+    color="accent"
+    style="float: right"
+  >
+    <mat-icon style="margin-bottom: 2px">add</mat-icon> Create New Manager
+  </button>
+</div>
+
+<div style="padding: 15px 20px">
+  <table class="table align-middle">
+    <thead>
+      <tr>
+        <th style="text-align: center;" scope="col">S.No</th>
+        <th style="text-align: center;" scope="col">UserName</th>
+        <th style="text-align: center;" scope="col">Email</th>
+        <th style="text-align: center;" scope="col">Name</th>
+        <th style="text-align: center;" scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let man of managers; let i = index">
+        <th style="text-align: center;" scope="row">{{ i + 1 }}</th>
+        <td style="text-align: center;">{{ man.managerUserName }}</td>
+        <td style="text-align: center;">{{ man.managerEmail }}</td>
+        <td style="text-align: center;">{{ man.managerName }}</td>
+        <td style="text-align: center;">
+          <button
+            (click)="updateManager(man)"
+            mat-mini-fab
+            color="primary"
+            style="margin: 5px;"
+          >
+            <mat-icon>person</mat-icon>
+          </button>
+          <button
+            (click)="deleteManager(man)"
+            mat-mini-fab
+            style="background-color: red; color: white; margin: 5px"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

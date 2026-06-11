@@ -1,0 +1,89 @@
+<header>
+  <div
+    class="d-flex align-items-center"
+    style="
+      background-color: rgb(1, 1, 98);
+      height: 50px;
+      justify-content: space-between;
+    "
+  >
+    <h4
+      style="
+        padding: 0px 10px;
+        font-weight: 200;
+        margin-top: 10px;
+        color: white;
+      "
+    >
+      CREATE & DELETE USER
+    </h4>
+  </div>
+</header>
+
+<div style="padding: 20px; height: 76px">
+  <button
+    mat-raised-button
+    (click)="openDialog()"
+    color="accent"
+    style="float: right"
+  >
+    <mat-icon style="margin-bottom: 2px">add</mat-icon> Create New User
+  </button>
+</div>
+
+<div style="padding: 15px 20px">
+  <table class="table align-middle">
+    <thead>
+      <tr>
+        <th style="text-align: center;" scope="col">S.No</th>
+        <th style="text-align: center;" scope="col">UserName</th>
+        <th style="text-align: center;" scope="col">Email</th>
+        <th style="text-align: center;" scope="col">Name</th>
+        <th style="text-align: center;" scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of employees; let i = index">
+        <th style="text-align: center;" scope="row">{{ i + 1 }}</th>
+        <td style="text-align: center;">{{ emp.empUserName }}</td>
+        <td style="text-align: center;">{{ emp.empEmail }}</td>
+        <td style="text-align: center;">{{ emp.empName }}</td>
+        <td style="text-align: center;">
+          <button
+            matTooltip="Edit User"
+            mat-mini-fab
+            (click)="editUser(emp)"
+            color="primary"
+            style="margin: 5px"
+          >
+            <mat-icon>person</mat-icon>
+          </button>
+          <button
+            matTooltip="Edit Leave Count"
+            mat-mini-fab
+            (click)="editLeave(emp)"
+            style="background-color: purple; color: white; margin: 5px"
+          >
+            <mat-icon>assignment_ind</mat-icon>
+          </button>
+          <button
+            matTooltip="Delete Employee"
+            mat-mini-fab
+            (click)="deleteEmployee(emp)"
+            style="background-color: red; color: white; margin: 5px"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button
+            matTooltip="Manage Covering Employees"
+            mat-mini-fab
+            (click)="manageAllCoveringEmployees(emp)"
+            style="background-color: rgba(25, 25, 81); color: white; margin: 5px"
+          >
+            <mat-icon>open_in_new</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

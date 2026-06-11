@@ -1,0 +1,47 @@
+<header>
+  <div class="d-flex align-items-center" style="
+        background-color: rgb(1, 1, 98);
+        height: 50px;
+        justify-content: space-between;
+      ">
+    <h4 style="
+          padding: 0px 10px;
+          font-weight: 200;
+          margin-top: 10px;
+          color: white;
+        ">
+      CHANGE YOUR COVERING EMPLOYEES:
+    </h4>
+    <div (click)="dialogRef.close(1)">
+      <span class="iconify" data-icon="ion:close" style="color: white; padding-right: 5px; cursor: pointer;"
+        data-width="26" data-height="26"></span>
+    </div>
+  </div>
+</header>
+
+<div>
+
+  <form (ngSubmit)="submitCoveringEmp(f.value)" #f="ngForm" [formGroup]="empService.coveringEmployeeForm">
+    <mat-form-field style="width: 48%; margin: 10px 5px;" appearance="outline">
+      <mat-label>Covering Employee - 1</mat-label>
+      <mat-select formControlName="coveringEmp1" (valueChange)="changeCoverEmp1($event, 'first')">
+        <mat-option *ngFor="let emp of employees" [value]="emp">
+          {{ emp.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field style="width: 48%; margin: 10px 5px;" appearance="outline">
+      <mat-label>Covering Employee - 2</mat-label>
+      <mat-select formControlName="coveringEmp2" (valueChange)="changeCoverEmp1($event, 'second')"
+        placeholder="Add Team Members">
+        <mat-option *ngFor="let emp of coveringEmployees2" [value]="emp">
+          {{ emp.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button [disabled]="empService.coveringEmployeeForm.invalid" mat-raised-button color="accent"
+      style="float: right;">Add</button>
+  </form>
+</div>

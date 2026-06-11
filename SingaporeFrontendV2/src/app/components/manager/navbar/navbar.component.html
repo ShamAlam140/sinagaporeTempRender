@@ -1,0 +1,76 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" opened="true">
+    <div class=" d-flex justify-content-center" style="height: 50px">
+      <h4 style="color: white; letter-spacing: 1px; padding: 10px 15px">
+        {{ currUser.managerName }}
+      </h4>
+    </div>
+
+    <mat-list style="margin-top: 20px">
+      <mat-list-item
+        [routerLink]="['/manager', 'manager-profile']"
+        routerLinkActive="active"
+      >
+        <mat-icon class="sidenav-icon">account_circle</mat-icon> My
+        Profile</mat-list-item
+      >
+      <mat-divider></mat-divider>
+      <mat-list-item
+        [routerLink]="['/manager', 'employees-reporting']"
+        routerLinkActive="active"
+        ><mat-icon class="sidenav-icon">perm_identity</mat-icon>
+        Employees</mat-list-item
+      >
+
+      <mat-divider></mat-divider>
+      <mat-list-item
+        [routerLink]="['/manager', 'policy']"
+        routerLinkActive="active"
+        ><mat-icon class="sidenav-icon">attach_file</mat-icon>
+        Policy</mat-list-item
+      >
+
+      <mat-divider></mat-divider>
+      <mat-list-item
+        [routerLink]="['/manager', 'holidays']"
+        routerLinkActive="active"
+        ><mat-icon class="sidenav-icon">redeem</mat-icon>
+        Holidays</mat-list-item
+      >
+
+      <mat-divider></mat-divider>
+      <mat-list-item
+        [routerLink]="['/manager', 'leave-requests']"
+        routerLinkActive="active"
+        ><mat-icon class="sidenav-icon">hourglass_empty</mat-icon> Leave
+        Requests</mat-list-item
+      >
+
+      <mat-divider></mat-divider>
+
+      <!-- <mat-list-item
+      [routerLink]="['/manager', 'cancel-request']"
+      routerLinkActive="active"
+      ><mat-icon class="sidenav-icon">hourglass_empty</mat-icon> Cancel
+      Requests</mat-list-item
+    > -->
+
+    <!-- <mat-divider></mat-divider> -->
+      <mat-list-item
+        [routerLink]="['/manager', 'leave-reports']"
+        routerLinkActive="active"
+        ><mat-icon class="sidenav-icon">assignment_ind</mat-icon> Leave
+        Reports</mat-list-item
+      >
+
+      <mat-divider></mat-divider>
+      <mat-list-item (click)="logout()" >
+        <mat-icon class="sidenav-icon">power_settings_new</mat-icon> Logout
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

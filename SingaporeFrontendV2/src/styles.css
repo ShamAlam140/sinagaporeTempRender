@@ -1,0 +1,208 @@
+/* You can add global styles to this file, and also import other style files */
+@import "bootstrap/dist/css/bootstrap.css";
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+a.fc-col-header-cell-cushion,
+a.fc-daygrid-day-number {
+  color: #2c3e50 !important;
+  text-decoration: none !important;
+}
+
+li {
+  text-decoration: none;
+  list-style: none;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  padding: 0 !important;
+}
+
+.mat-grid-tile-content {
+  display: block !important;
+}
+
+.fc-daygrid-dot-event .fc-event-title {
+  color: black !important;
+}
+
+.fc-direction-ltr .fc-daygrid-event .fc-event-time {
+  color: black !important;
+}
+
+a.fc-col-header-cell-cushion,
+a.fc-daygrid-day-number {
+  color: rgb(1, 1, 98) !important;
+  text-decoration: none !important;
+}
+
+.snackbar-success {
+  background-color: green;
+}
+
+.snackbar-danger {
+  background-color: rgb(223, 0, 0);
+}
+
+.mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: rgb(1, 1, 158) !important;
+}
+
+/* ========================================================
+   Angular Material v19 MDC Compatibility Overrides
+   Forces v19 MDC-based components to render like v13
+   ======================================================== */
+
+/* ---- SIDEBAR: White text on all list items ---- */
+mat-sidenav .mat-mdc-list-item,
+mat-sidenav .mat-mdc-list-item *,
+mat-sidenav .mat-mdc-list-item .mdc-list-item__primary-text,
+mat-sidenav .mat-mdc-list-item .mdc-list-item__content,
+mat-sidenav .mat-mdc-list-item .mat-mdc-list-item-unscoped-content,
+mat-sidenav .mdc-list-item__content {
+  color: white !important;
+}
+
+/* Sidebar list item height and cursor */
+mat-sidenav .mat-mdc-list-item {
+  height: 42px !important;
+  cursor: pointer !important;
+  letter-spacing: 0.5px !important;
+}
+
+/* Sidebar icons - white with slight transparency */
+mat-sidenav .mat-mdc-list-item .mat-icon,
+mat-sidenav .mat-mdc-list-item mat-icon,
+mat-sidenav .sidenav-icon {
+  color: rgba(255, 255, 255, 0.9) !important;
+  margin-right: 15px !important;
+}
+
+/* Sidebar dividers - white with transparency */
+mat-sidenav .mat-mdc-divider,
+mat-sidenav .mat-divider,
+mat-sidenav mat-divider {
+  border-top-color: rgba(255, 255, 255, 0.5) !important;
+  margin: 5px 3px !important;
+}
+
+/* ---- MAT-CARD: v13-like flat layout ---- */
+/* v19 mat-card has extra wrapper divs, force inline content */
+.mat-mdc-card {
+  padding: 16px !important;
+  display: block !important;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, .2),
+    0px 1px 1px 0px rgba(0, 0, 0, .14),
+    0px 1px 3px 0px rgba(0, 0, 0, .12) !important;
+}
+
+/* Force card content to be inline (same line as label) */
+.mat-mdc-card>* {
+  display: inline !important;
+}
+
+/* Bootstrap rows inside cards must stay flex for horizontal grid */
+.mat-mdc-card .row,
+.mat-mdc-card div.row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+}
+
+/* Bootstrap columns inside rows must not be inline */
+.mat-mdc-card .row>.col,
+.mat-mdc-card .row>[class*="col-"] {
+  display: block !important;
+}
+
+/* mat-card-title should be block */
+.mat-mdc-card mat-card-title,
+.mat-mdc-card .mat-mdc-card-title {
+  display: block !important;
+}
+
+/* Flex d-flex inside cards */
+.mat-mdc-card .d-flex {
+  display: flex !important;
+}
+
+/* Remove extra padding that v19 adds to card-content wrapper */
+.mat-mdc-card .mat-mdc-card-content,
+.mat-mdc-card .mdc-card__content {
+  padding: 0 !important;
+  display: inline !important;
+}
+
+/* mat-card-title sizing */
+.mat-mdc-card-title {
+  font-size: 18px !important;
+  margin-bottom: 8px !important;
+}
+
+/* ---- MAT-FORM-FIELD ---- */
+.mat-mdc-form-field-flex {
+  padding: 0 !important;
+}
+
+/* ---- SNACKBAR ---- */
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  background-color: inherit !important;
+}
+
+/* ---- MAT-BADGE ---- */
+.mat-badge-content {
+  font-size: 11px !important;
+}
+
+/* ---- MAT-TABLE: Match old UI look ---- */
+.mat-mdc-table {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Header and Data cells */
+.mat-mdc-header-cell {
+  font-weight: 500 !important;
+  color: rgba(0, 0, 0, 0.54) !important;
+  text-align: center !important;
+  border-right: none !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
+  padding: 12px 6px !important;
+  vertical-align: bottom !important;
+}
+
+.mat-mdc-cell {
+  text-align: center !important;
+  border-right: none !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
+  padding: 15px 6px !important;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+/* Remove border from last column */
+.mat-mdc-header-cell:last-child,
+.mat-mdc-cell:last-child {
+  border-right: none !important;
+}
+
+/* Row borders */
+.mat-mdc-row,
+.mat-mdc-header-row {
+  border-bottom: none !important;
+}
+
+/* ---- MAT-DIALOG ---- */
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  padding: 24px !important;
+}

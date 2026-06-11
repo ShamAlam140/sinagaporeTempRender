@@ -1,0 +1,83 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" opened="true">
+    <div style="height: 50px">
+      <h4 style="color: white; letter-spacing: 1px; padding: 10px 15px">
+        {{ currUser.name }}
+      </h4>
+    </div>
+
+    <mat-list style="margin-top: 20px">
+      <mat-list-item
+        [routerLink]="['/super-admin', 'super-admin-profile']"
+        routerLinkActive="active"
+      >
+        <mat-icon class="sidenav-icon">account_circle</mat-icon> My
+        Profile</mat-list-item
+      >
+
+      <mat-divider></mat-divider>
+      <mat-list-item
+        [routerLink]="['/super-admin', 'user']"
+        routerLinkActive="active"
+        ><mat-icon class="sidenav-icon">create</mat-icon>Create Employee
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+      <mat-list-item
+        [routerLink]="['/super-admin', 'manager']"
+        routerLinkActive="active"
+        ><mat-icon class="sidenav-icon">create</mat-icon>Create Manager
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+      <mat-list-item
+        [routerLink]="['/super-admin', 'upload-policies']"
+        routerLinkActive="active"
+        ><mat-icon class="sidenav-icon">publish</mat-icon> Upload
+        Policies</mat-list-item
+      >
+
+      <mat-divider></mat-divider>
+      <mat-list-item
+        [routerLink]="['/super-admin', 'upload-leaves']"
+        routerLinkActive="active"
+        ><mat-icon class="sidenav-icon">publish</mat-icon> Upload
+        Leaves</mat-list-item
+      >
+
+      <mat-divider></mat-divider>
+      <mat-list-item
+        [routerLink]="['/super-admin', 'upload-holidays']"
+        routerLinkActive="active"
+        ><mat-icon class="sidenav-icon">redeem</mat-icon> Upload
+        Holidays</mat-list-item
+      >
+
+    
+
+      <mat-divider></mat-divider>
+      <mat-list-item
+        [routerLink]="['/super-admin', 'leave-reports']"
+        routerLinkActive="active"
+        ><mat-icon class="sidenav-icon">assignment</mat-icon> Leave-Reports</mat-list-item
+      >
+
+      <mat-divider></mat-divider>
+      <mat-list-item
+        [routerLink]="['/super-admin', 'employee-manager']"
+        routerLinkActive="active"
+        ><mat-icon class="sidenav-icon">compare_arrows</mat-icon>
+        Mapping</mat-list-item
+      >
+
+      <mat-divider></mat-divider>
+      <mat-list-item (click)="logout()">
+        <mat-icon  class="sidenav-icon">power_settings_new</mat-icon> Logout
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

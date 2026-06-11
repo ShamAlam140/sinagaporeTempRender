@@ -1,0 +1,51 @@
+<h1 mat-dialog-title style="margin-bottom: 0px">{{ empName }}</h1>
+<div mat-dialog-content>
+  <div style="padding: 10px">
+    <table id="excel-data" class="table align-middle" *ngIf="employee.length !== 0; else goto" style="width: 100%">
+      <thead>
+        <tr>
+          <th scope="col">S.NO</th>
+          <th scope="col">LEAVE TYPE</th>
+          <th scope="col">FROM</th>
+          <th scope="col">TO</th>
+          <th scope="col">DAYS</th>
+          <th scope="col">STATUS</th>
+          <th hidden scope="col">CERTIFICATE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let leave of employee; let i = index">
+          <th scope="row">
+            {{ i + 1 }}
+          </th>
+          <td>{{ leave.type }}</td>
+          <td>{{ leave.fromDate | date }}</td>
+          <td>{{ leave.toDate | date }}</td>
+          <td>{{ leave.count }}</td>
+          <td>
+            <span
+              class="badge"
+              [class.bg-primary]="leave.status === 'Pending'"
+              [class.bg-success]="leave.status === 'Approved'"
+              [class.bg-danger]="leave.status === 'Denied'"
+              style="font-weight: 400; padding: 8px; width: 80px"
+            >
+              {{ leave.status }}
+            </span>
+          </td>
+          <td hidden>{{ leave.certificate }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="employee.length !== 0" class="row">
+      <div class="col-3">
+        <button (click)="exportExcel()" color="primary" mat-raised-button> <mat-icon> import_export</mat-icon> Export to Excel</button>
+      </div>
+    </div>
+    <ng-template #goto>
+      <div class="d-flex justify-content-center" style="margin-top: 150px;">
+        <p>No Data To Show!</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div>
+  <div class="row d-flex align-items-center" style="padding: 12px 50px">
+        <label for="leaveReason" class="form-label">COMMENT : </label>
+        <textarea   [(ngModel)]="comment" ></textarea>
+  </div>
+
+  <button
+    class="btn btn-primary"
+    (click)="onsubmit()" 
+    style="float: right; margin-right: 20px"
+  >
+    SEND COMMENT
+  </button>
+</div>

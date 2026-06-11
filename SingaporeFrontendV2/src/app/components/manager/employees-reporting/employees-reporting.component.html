@@ -1,0 +1,58 @@
+<header>
+  <div class="d-flex align-items-center" style="
+      background-color: rgb(1, 1, 98);
+      height: 50px;
+      justify-content: space-between;
+    ">
+    <h4 style="
+        padding: 0px 10px;
+        font-weight: 200;
+        margin-top: 10px;
+        color: white;
+      ">
+      EMPLOYEES REPORTING
+    </h4>
+  </div>
+</header>
+
+<div>
+  <div style="padding: 20px">
+    <!-- Search Filter -->
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Filter</mat-label>
+      <input matInput [(ngModel)]="searchKey" (keyup)="applyFilter()" placeholder="Search" />
+    </mat-form-field>
+
+    <!-- Employee Table -->
+    <table mat-table [dataSource]="listData" class="mat-elevation-z8">
+      <!-- Index Column -->
+      <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let row; let i = index" class="spacing-cell">
+          {{ i + 1 }}
+        </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> E.Name </th>
+        <td mat-cell *matCellDef="let row" class="spacing-cell">
+          {{ row.empName }}
+        </td>
+      </ng-container>
+
+      <!-- User Name Column -->
+      <ng-container matColumnDef="userName">
+        <th mat-header-cell *matHeaderCellDef> UserName </th>
+        <td mat-cell *matCellDef="let row" class="spacing-cell">
+          {{ row.empUserName }}
+        </td>
+      </ng-container>
+
+      <!-- Header Row -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <!-- Data Rows -->
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>

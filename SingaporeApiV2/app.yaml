@@ -1,0 +1,11 @@
+runtime: nodejs22
+entrypoint: npm start
+
+env_variables:
+  MONGODB_URI: 'mongodb+srv://SingaporeDb:singa2022@cluster0.0ebcrdt.mongodb.net/Susaleave?retryWrites=true&w=majority&appName=Cluster0'
+  CLOUDINARY_CLOUD_NAME: 'dyhzx8alt'
+  CLOUDINARY_API_KEY: '471247929416112'
+  CLOUDINARY_API_SECRET: 'N5CiNCs_Tp2yyf6jB8MztzxsncU'
+  GMAIL_USER: 'singaporehighcommissionsdb@gmail.com'
+  GMAIL_PASS: 'ilmm quxj yunv pscs'
+  HR_KEY: '62bd553f463149f102b33300'

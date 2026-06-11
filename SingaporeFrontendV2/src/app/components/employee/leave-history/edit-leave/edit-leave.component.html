@@ -1,0 +1,117 @@
+<header>
+  <div
+    class="d-flex align-items-center"
+    style="background-color: rgb(1, 1, 98); height: 50px; justify-content: space-between;"
+  >
+    <h4
+      style="padding: 0px 10px; font-weight: 200; margin-top: 10px; color: white;"
+    >
+      EDIT LEAVE
+    </h4>
+  </div>
+</header>
+
+<form
+  style="padding: 30px"
+  [formGroup]="empService.applyLeaveForm"
+  (ngSubmit)="onSubmit()"
+>
+  <!-- Warning for past approved leave -->
+  <div *ngIf="isApprovedLeave && isPastApprovedLeave" class="alert alert-warning">
+    Approved past leave cannot be edited. Only future approved leave can be edited.
+  </div>
+
+  <div class="row d-flex align-items-center" style="padding: 12px 20px">
+    <div class="col-4">
+      <label for="leaveDate" class="form-label">LEAVE DATES</label>
+      <mat-form-field appearance="outline" color="white" style="display: block">
+        <mat-date-range-input formGroupName="range" [rangePicker]="picker">
+          <input
+            #startDate
+            (dateChange)="checkStartDate(startDate.value)"
+            id="leaveDate"
+            matStartDate
+            formControlName="fromDate"
+            placeholder="From Date"
+          />
+          <input
+            #endDate
+            (dateChange)="checkEndDate(endDate.value)"
+            matEndDate
+            formControlName="toDate"
+            placeholder="To Date"
+          />
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+    </div>
+
+    <div class="col-4">
+      <label for="leaveType" class="form-label">LEAVE TYPE</label>
+      <mat-form-field appearance="outline" style="display: block">
+        <mat-select (valueChange)="leaveType($event)" formControlName="leaveType">
+          <mat-option [value]="leave.type" *ngFor="let leave of leaves">
+            {{ leave.type }} (Remaining - {{ leave.remaining }})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-4">
+      <form *ngIf="showCerti === true">
+        <p *ngIf="selectedLeaveType === 'Hospitalization'">
+          UPLOAD PHOTO OF LEAVE CERTIFICATE (Required)
+        </p>
+        <p *ngIf="selectedLeaveType === 'Sick/Casual'">
+          UPLOAD PHOTO OF LEAVE CERTIFICATE (Optional)
+        </p>
+        <input
+          (change)="uploadCertificate($event)"
+          type="file"
+          id="myFile"
+          name="filename"
+        />
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="showHalfDaybool === true" class="row" style="padding: 12px 20px">
+    <div class="col">
+      <label class="form-label">HALF DAY</label> <br />
+      <mat-radio-group aria-label="Select an option">
+        <mat-radio-button
+          (change)="checkHalfDayLeave($event, 1)"
+          value="1"
+        >AM</mat-radio-button>
+        <mat-radio-button
+          style="margin-left: 10px;"
+          (change)="checkHalfDayLeave($event, 2)"
+          value="2"
+        >PM</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+
+  <div class="row d-flex align-items-center" style="padding: 12px 20px">
+    <div class="col">
+      <label for="leaveReason" class="form-label">LEAVE REASON</label>
+      <mat-form-field
+        id="leaveReason"
+        appearance="outline"
+        style="display: block"
+      >
+        <textarea matInput formControlName="leaveReason"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    class="btn btn-primary"
+    style="float: right; margin-right: 20px"
+    [disabled]="empService.applyLeaveForm.invalid || isSubmitting || (isApprovedLeave && isPastApprovedLeave)"
+  >
+    {{ isSubmitting ? 'UPDATING...' : 'EDIT LEAVE' }}
+  </button>
+</form>

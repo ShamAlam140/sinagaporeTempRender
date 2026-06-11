@@ -1,0 +1,40 @@
+<header
+  *ngIf="currRoute === '/login' || currRoute === '/'"
+  class="p-3 text-white"
+>
+  <div class="container">
+    <div class="d-flex nav align-items-center">
+      <a
+        href="/"
+        class="d-flex align-items-center text-white text-decoration-none"
+      >
+        Leave Management
+      </a>
+    </div>
+  </div>
+</header>
+<router-outlet></router-outlet>
+
+<!-- <div *ngIf="!isSelected">
+  <mat-form-field appearance="fill">
+    <mat-label>Select</mat-label>
+    <mat-select>
+      <mat-option
+        value="one"
+        routerLink="/employee"
+        (onSelectionChange)="isSelected = !isSelected"
+        >Employee</mat-option
+      >
+      <mat-option
+        value="two"
+        routerLink="/manager"
+        (onSelectionChange)="isSelected = !isSelected"
+        >Manager</mat-option
+      >
+      <mat-option value="three" routerLink="/super-admin"
+        >Super admin</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+</div> -->
+<!-- <router-outlet></router-outlet> -->

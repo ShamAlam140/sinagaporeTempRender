@@ -1,0 +1,13 @@
+<div mat-dialog-content>
+  Are you sure you want to {{ data.action }} this leave ?
+</div>
+
+<div class="row d-flex align-items-center" style="padding: 12px 50px">
+  <label for="leaveReason" class="form-label">COMMENT : </label>
+  <textarea   [(ngModel)]="data.employee.mngcomment" ></textarea>
+</div>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Yes</button>
+</mat-dialog-actions>

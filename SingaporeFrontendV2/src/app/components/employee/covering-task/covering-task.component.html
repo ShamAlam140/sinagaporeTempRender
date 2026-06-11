@@ -1,0 +1,50 @@
+<header>
+    <div
+      class="d-flex align-items-center"
+      style="
+        background-color: rgb(1, 1, 98);
+        height: 50px;
+        justify-content: space-between;
+      "
+    >
+      <h4
+        style="
+          padding: 0px 10px;
+          font-weight: 200;
+          margin-top: 10px;
+          color: white;
+        "
+      >
+        COVERING TASK
+      </h4>
+    </div>
+  </header>
+
+  <div style="width: 100%; margin-top: 25px;">
+    <mat-accordion class="d-flex justify-content-center">
+        <mat-expansion-panel style="width: 80%;">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                <b> YOU HAVE GOT THE COVERING JOB OF: </b>
+                
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="d-flex justify-content-center" *ngIf="coveringData.length === 0; else work">
+              <b>No Data to Show!</b>
+          </div>
+          <ng-template #work>
+            <div *ngFor="let job of coveringData; index as i">
+                <p> {{ i+1 }}. <b>{{ job.cEmpName }}</b>
+                  <b (click)="deleteEntry(job._id)">
+                    <span  class="iconify" data-icon="ion:remove-circle"  style="color: red; float: right; cursor: pointer;" data-width="24" data-height="24"></span>
+                  </b>
+                </p> 
+                <p> From: <b>{{ job.leave.fromDate | date }}</b>  - To: <b>{{ job.leave.toDate | date }}</b> </p>   
+            </div>
+          </ng-template>
+          
+        </mat-expansion-panel>
+      </mat-accordion>
+  </div>
+
+  

@@ -1,0 +1,73 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" opened="true">
+    <div style="height: 50px" class="d-flex justify-content-center">
+      <h4 style="color: white; letter-spacing: 1px; padding: 10px 15px">
+        {{ currUser.empName }}
+      </h4>
+    </div>
+
+    <mat-list style="margin-top: 20px">
+      <mat-list-item
+        [routerLink]="['/employee', 'user-profile']"
+        routerLinkActive="active"
+      >
+        <mat-icon class="sidenav-icon">account_circle</mat-icon> My
+        Profile</mat-list-item
+      >
+
+      <mat-divider></mat-divider>
+      <mat-list-item
+        [routerLink]="['/employee', 'apply-leave']"
+        routerLinkActive="active"
+        ><mat-icon class="sidenav-icon">calendar_today</mat-icon> Apply
+        Leave</mat-list-item
+      >
+      <mat-divider></mat-divider>
+      <mat-list-item
+        [routerLink]="['/employee', 'covering-emp']"
+        routerLinkActive="active"
+        ><mat-icon class="sidenav-icon">person</mat-icon> Covering Employee
+        </mat-list-item
+      >
+      <mat-divider></mat-divider>
+      <mat-list-item
+        [routerLink]="['/employee', 'holidays']"
+        routerLinkActive="active"
+        ><mat-icon class="sidenav-icon">redeem</mat-icon>
+        Holidays</mat-list-item
+      >
+
+      <mat-divider></mat-divider>
+      <mat-list-item
+        [routerLink]="['/employee', 'policy']"
+        routerLinkActive="active"
+        ><mat-icon class="sidenav-icon">attach_file</mat-icon>
+        Policy</mat-list-item
+      >
+
+      <mat-divider></mat-divider>
+      <mat-list-item
+        [routerLink]="['/employee', 'leave-history']"
+        routerLinkActive="active"
+        ><mat-icon class="sidenav-icon">history</mat-icon> Leave
+        History</mat-list-item
+      >
+
+      <!-- <mat-divider></mat-divider>
+      <mat-list-item
+        [routerLink]="['/employee', 'notifications']"
+        routerLinkActive="active"
+        ><mat-icon class="sidenav-icon">history</mat-icon> Notifications
+      </mat-list-item> -->
+
+      <mat-divider></mat-divider>
+      <mat-list-item (click)="logout()" routerLinkActive="active"
+        ><mat-icon class="sidenav-icon">power_settings_new</mat-icon> Logout
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
