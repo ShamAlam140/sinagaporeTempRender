@@ -1,7 +1,9 @@
-export const baseUrl = 'https://stellar-button-437607-n8.el.r.appspot.com/api/employee/login';
+import { environment } from 'src/environments/environment';
 
-export const employeeLoginUrl = baseUrl + '/employee/';
-export const managerLoginUrl = baseUrl + '/manager/';
-export const otpUrl = baseUrl + '/otp/';
-export const superadminLoginUrl = baseUrl + '/superadmin/';
-export const coveringEmpUrl = baseUrl + '/coveringEmp';
+export const baseUrl = environment.apiUrl;
+
+export const employeeLoginUrl = `${baseUrl}/employee/login`;
+export const managerLoginUrl = `${baseUrl}/manager/login`;
+export const otpUrl = `${baseUrl}/otp`;
+export const superadminLoginUrl = `${baseUrl}/superadmin/login`;
+export const coveringEmpUrl = `${baseUrl}/coveringEmp`;

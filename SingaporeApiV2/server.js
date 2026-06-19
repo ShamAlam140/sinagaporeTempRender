@@ -59,6 +59,7 @@ const limiter = rateLimit({
     max: 500,
     message: 'Too many requests, please try again later.',
 });
+app.set('trust proxy', 1); // Trust first proxy (Render)
 app.use(limiter);
 
 // ========= Body Parsing =========

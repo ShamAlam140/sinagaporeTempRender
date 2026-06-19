@@ -24,14 +24,14 @@ export class UserService {
   login(user: IUser) {
     if (user.role === 'Employee') {
       const currUser = { empEmail: user.email, empPassword: user.password };
-      return this.http.post("https://stellar-button-437607-n8.el.r.appspot.com/api/employee/login", currUser);
+      return this.http.post(employeeLoginUrl, currUser);
     } else if (user.role === 'Manager') {
       const currUser = { managerEmail: user.email, managerPassword: user.password };
-      return this.http.post("https://stellar-button-437607-n8.el.r.appspot.com/api/manager/login", currUser);
+      return this.http.post(managerLoginUrl, currUser);
     } else if (user.role === 'SuperAdmin') {
-      const currUser = { email: user.email, password: user.password }; console.log(currUser);
+      const currUser = { email: user.email, password: user.password };
 
-      return this.http.post("https://stellar-button-437607-n8.el.r.appspot.com/api/superadmin/login", currUser);
+      return this.http.post(superadminLoginUrl, currUser);
     } else {
       return null;
     }

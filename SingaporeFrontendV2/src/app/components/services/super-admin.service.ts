@@ -26,22 +26,22 @@ export class SuperAdminService {
 
   // NOTE: Dead endpoint — '/super-admin' route does not exist on backend
   // getAdmin() {
-  //   return this.http.get<SuperAdmin[]>('https://stellar-button-437607-n8.el.r.appspot.com/super-admin ');
+  //   return this.http.get<SuperAdmin[]>(`${environment.apiUrl}/super-admin`);
   // }
 
   // NOTE: Dead endpoint — '/super-admin' POST route does not exist on backend
   // postAdmin(data) {
-  //   return this.http.post<SuperAdmin>('https://stellar-button-437607-n8.el.r.appspot.com/super-admin ', data);
+  //   return this.http.post<SuperAdmin>(`${environment.apiUrl}/super-admin`, data);
   // }
 
   // NOTE: Dead endpoint — '/coveringEmp' route does not exist on backend
   // postCoveringEmployee(data) {
-  //   return this.http.post("https://stellar-button-437607-n8.el.r.appspot.com/coveringEmp", data);
+  //   return this.http.post(`${environment.apiUrl}/coveringEmp`, data);
   // }
 
   // NOTE: Dead endpoint — '/coveringEmp/:id' PUT route does not exist on backend
   // putCoveringEmployee(data) {
-  //   return this.http.put("https://stellar-button-437607-n8.el.r.appspot.com/coveringEmp" + '/' + data.id, data);
+  //   return this.http.put(`${environment.apiUrl}/coveringEmp/${data.id}`, data);
   // }
 
   uploadPolicies(data) {
