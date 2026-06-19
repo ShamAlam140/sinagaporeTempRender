@@ -13,11 +13,12 @@ try {
     console.log('📧 [DEBUG] Setting up Email Transporter');
     console.log('📧 [DEBUG] GMAIL_USER:', process.env.GMAIL_USER);
     console.log('📧 [DEBUG] GMAIL_PASS (length):', process.env.GMAIL_PASS ? process.env.GMAIL_PASS.length : 'NOT SET');
-    
+
     transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
+        port: 587,
+        secure: false, // must be false for 587, but requireTLS will upgrade it
+        requireTLS: true,
         connectionTimeout: 15000, // 15 seconds timeout instead of 60
         greetingTimeout: 15000,
         socketTimeout: 15000,
@@ -28,7 +29,7 @@ try {
         debug: true, // Show SMTP traffic
         logger: true // Log information into console
     });
-    
+
     console.log('✅ [DEBUG] Email Transporter created successfully with explicitly secure settings.');
     console.log('--------------------------------------------------');
 } catch (err) {
@@ -67,9 +68,9 @@ async function sendMail(to, subject, text) {
         console.log(`⏳ [DEBUG] Subject: "${subject}"`);
         console.log(`⏳ [DEBUG] To: ${recipients.join(',')}`);
         console.log(`⏳ [DEBUG] Waiting for transporter.sendMail...`);
-        
+
         const info = await transporter.sendMail(mailOptions);
-        
+
         console.log('✅ [DEBUG] Email sent successfully:', info.response);
         return { success: true, info };
     } catch (error) {
