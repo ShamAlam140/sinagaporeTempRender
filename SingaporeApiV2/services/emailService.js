@@ -9,29 +9,13 @@ const { formatDateStr } = require('../utils/dateUtils');
 // Create reusable transporter
 let transporter;
 try {
-    console.log('--------------------------------------------------');
-    console.log('📧 [DEBUG] Setting up Email Transporter');
-    console.log('📧 [DEBUG] GMAIL_USER:', process.env.GMAIL_USER);
-    console.log('📧 [DEBUG] GMAIL_PASS (length):', process.env.GMAIL_PASS ? process.env.GMAIL_PASS.length : 'NOT SET');
-
     transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false, // must be false for 587, but requireTLS will upgrade it
-        requireTLS: true,
-        connectionTimeout: 15000, // 15 seconds timeout instead of 60
-        greetingTimeout: 15000,
-        socketTimeout: 15000,
+        service: 'Gmail',
         auth: {
             user: process.env.GMAIL_USER,
             pass: process.env.GMAIL_PASS,
         },
-        debug: true, // Show SMTP traffic
-        logger: true // Log information into console
     });
-
-    console.log('✅ [DEBUG] Email Transporter created successfully with explicitly secure settings.');
-    console.log('--------------------------------------------------');
 } catch (err) {
     console.error('⚠️ Email transporter creation failed:', err.message);
 }
@@ -64,22 +48,11 @@ async function sendMail(to, subject, text) {
             text,
         };
 
-        console.log(`⏳ [DEBUG] Attempting to send email...`);
-        console.log(`⏳ [DEBUG] Subject: "${subject}"`);
-        console.log(`⏳ [DEBUG] To: ${recipients.join(',')}`);
-        console.log(`⏳ [DEBUG] Waiting for transporter.sendMail...`);
-
         const info = await transporter.sendMail(mailOptions);
-
-        console.log('✅ [DEBUG] Email sent successfully:', info.response);
+        console.log('✅ Email sent:', subject, '→', recipients.join(', '));
         return { success: true, info };
     } catch (error) {
-        console.log('--------------------------------------------------');
-        console.error('❌ [DEBUG FATAL ERROR] Email send failed!');
-        console.error('❌ Code:', error.code);
-        console.error('❌ Message:', error.message);
-        console.error('❌ Stack:', error.stack);
-        console.log('--------------------------------------------------');
+        console.error('❌ Email send failed:', error.message);
         return { success: false, error: error.message };
     }
 }
